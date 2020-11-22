@@ -1,9 +1,6 @@
 [submodule "thirdparty/godot-xterm"]
 	path = thirdparty/godot-xterm
 	url = https://github.com/lihop/godot-xterm
-[submodule "thirdparty/godot-python"]
-	path = thirdparty/godot-python
-	url = https://github.com/touilleMan/godot-python
 [submodule "thirdparty/Godot-3D-text-plugin"]
 	path = thirdparty/Godot-3D-text-plugin
 	url = https://github.com/SIsilicon/Godot-3D-text-plugin
