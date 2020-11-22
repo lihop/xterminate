@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mystery_sax.ogg-c614b3d1819482076e646fa31126e313.oggstr"
+
+[deps]
+
+source_file="res://levels/music/mystery_sax.ogg"
+dest_files=[ "res://.import/mystery_sax.ogg-c614b3d1819482076e646fa31126e313.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -25,5 +25,5 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-rows = 16
-cols = 58
+rows = 12
+cols = 76

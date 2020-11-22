@@ -4,3 +4,6 @@
 [submodule "thirdparty/Godot-3D-text-plugin"]
 	path = thirdparty/Godot-3D-text-plugin
 	url = https://github.com/SIsilicon/Godot-3D-text-plugin
+[submodule "thirdparty/DecalCo"]
+	path = thirdparty/DecalCo
+	url = https://github.com/Master-J/DecalCo
