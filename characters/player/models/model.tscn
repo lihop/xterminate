@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://characters/player/models/model.glb" type="PackedScene" id=1]
+[ext_resource path="res://characters/player/models/model.gd" type="Script" id=2]
+[ext_resource path="res://characters/player/models/idle_loop.anim" type="Animation" id=3]
+[ext_resource path="res://characters/player/models/run_loop.anim" type="Animation" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 1, 0.27451, 1 )
+
+[node name="Model" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="Human Armature" parent="." index="0"]
+transform = Transform( 0.489195, 0.489195, -5.83166e-08, 0, -8.24722e-08, -0.691827, -0.489195, 0.489195, -5.83166e-08, 0, 0, 0 )
+
+[node name="Human_Mesh" parent="Human Armature/Skeleton" index="0"]
+material/0 = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Idle"
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="." index="2"]
+master_player = NodePath("../AnimationPlayer")
+active = true
+data = {
+"active": true,
+"connections": [ "IdleRun", "out", 0, "Idle", "IdleRun", 0, "Run", "IdleRun", 1 ],
+"master": NodePath("../AnimationPlayer"),
+"nodes": [ {
+"id": "out",
+"position": Vector2( 378, 85 ),
+"type": "output"
+}, {
+"animation": ExtResource( 3 ),
+"filter": [  ],
+"id": "Idle",
+"position": Vector2( 50, 50 ),
+"type": "animation"
+}, {
+"animation": ExtResource( 4 ),
+"filter": [  ],
+"id": "Run",
+"position": Vector2( 51, 175 ),
+"type": "animation"
+}, {
+"blend": 0.0,
+"filter": [  ],
+"id": "IdleRun",
+"position": Vector2( 212, 79 ),
+"type": "blend2"
+} ]
+}

@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Animated Human.glb-5517f209bd4392b8c57d53f590dd1ab8.scn"
+path="res://.import/model.glb-0d743e64d1478bcc81e354939b7e094e.scn"
 
 [deps]
 
-source_file="res://characters/player/Animated Human.glb"
-dest_files=[ "res://.import/Animated Human.glb-5517f209bd4392b8c57d53f590dd1ab8.scn" ]
+source_file="res://characters/player/models/model.glb"
+dest_files=[ "res://.import/model.glb-0d743e64d1478bcc81e354939b7e094e.scn" ]
 
 [params]
 
