@@ -1,13 +1,23 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://models/ui/arrow/green.material" type="Material" id=1]
+[ext_resource path="res://models/ui/movement_hints/arrow/green.material" type="Material" id=1]
+[ext_resource path="res://models/ui/movement_hints/arrow/arrow.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 0.333333, 0, 1 )
+emission_enabled = true
+emission = Color( 0, 1, 0, 1 )
+emission_energy = 0.0
+emission_operator = 0
+emission_on_uv2 = false
 
 [node name="CSGArrow" type="CSGCombiner"]
+script = ExtResource( 2 )
 
 [node name="CSGBox" type="CSGBox" parent="."]
 height = 0.201487
 depth = 3.43973
-material = ExtResource( 1 )
+material = SubResource( 1 )
 
 [node name="CSGBox2" type="CSGBox" parent="."]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1, 0, 1 )
