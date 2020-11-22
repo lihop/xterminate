@@ -26,6 +26,11 @@ func _physics_process(delta: float) -> void:
 		direction += transform.basis.z
 		is_moving = true
 	
+	if is_moving and not $FootstepsPlayer.playing:
+		$FootstepsPlayer.play()
+	elif $FootstepsPlayer.playing and not is_moving:
+		$FootstepsPlayer.stop()
+	
 	if not $RayCastForward.is_colliding():
 		direction += transform.basis.z
 	if not $RayCastBackward.is_colliding():

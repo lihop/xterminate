@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://characters/player/player.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/models/model.tscn" type="PackedScene" id=2]
 [ext_resource path="res://characters/player/console/console.tscn" type="PackedScene" id=3]
+[ext_resource path="res://characters/player/sfx/running_on_ground.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 radius = 0.5
@@ -55,3 +56,8 @@ enabled = true
 [node name="RayCastRight" type="RayCast" parent="."]
 transform = Transform( -2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, 0.5, 0, 1.49012e-08 )
 enabled = true
+
+[node name="FootstepsPlayer" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0 )
+stream = ExtResource( 4 )
+unit_db = 50.0
