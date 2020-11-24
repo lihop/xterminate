@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://models/ui/file_label/file_label.gd" type="Script" id=1]
+
+[node name="Label3D" type="Spatial"]
+script = ExtResource( 1 )
+billboard = true
+text = "Text"
+text_size = 1.0
+font = null
+align = 0
+color = Color( 0.6, 0.6, 0.6, 1 )
+metallic = 0.0
+roughness = 0.5
+emission_color = Color( 1, 1, 1, 1 )
+emission_strength = 0.0
+extrude = 0.0
+max_steps = 256
+step_size = 1.0

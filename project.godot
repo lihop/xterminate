@@ -50,6 +50,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+System="*res://system/system.tscn"
 Player="*res://singletons/player.gd"
 
 [editor_plugins]

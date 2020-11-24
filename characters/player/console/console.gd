@@ -46,8 +46,6 @@ func message(message: String, user := "root", host := "godot", term := "tty/0"):
 	pause()
 	get_tree().paused = true
 	
-	# Send a ctrl-c to cancel anything in the terminal.
-	send_ctrl_c()
 	terminal.write("\r\n\r\n")
 	terminal.write("Broadcast message from %s@%s (%s) (%s):" \
 			% [user, host, term, format_date_time()])

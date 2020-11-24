@@ -26,7 +26,10 @@ class console_app(PromptToolkitApp):
 			except KeyboardInterrupt:
 				continue
 			except EOFError:
-				break
+				continue
 			else:
 				print('You entered:', text)
-		print(HTML('<b>Goodbye!</b>'))
+				print('looking for file to execute...')
+				bin_path = str(ProjectSettings.globalize_path("res://system/bin/")) + "rm" + ".py"
+				print('happy?')
+				print(bin_path)
