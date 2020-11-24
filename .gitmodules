@@ -1,9 +1,21 @@
 [submodule "thirdparty/godot-xterm"]
 	path = thirdparty/godot-xterm
 	url = https://github.com/lihop/godot-xterm
+[submodule "thirdparty/godot-python"]
+	path = thirdparty/godot-python
+	url = https://github.com/touilleMan/godot-python
 [submodule "thirdparty/Godot-3D-text-plugin"]
 	path = thirdparty/Godot-3D-text-plugin
 	url = https://github.com/SIsilicon/Godot-3D-text-plugin
 [submodule "thirdparty/DecalCo"]
 	path = thirdparty/DecalCo
 	url = https://github.com/Master-J/DecalCo
+[submodule "thirdparty/godot-python-assetlib-repo"]
+	path = thirdparty/godot-python-assetlib-repo
+	url = https://github.com/touilleMan/godot-python-assetlib-repo
+[submodule "thirdparty/gd-tokenizer"]
+	path = thirdparty/gd-tokenizer
+	url = https://github.com/winston-yallow/gd-tokenizer
+[submodule "thirdparty/godot-xterm-asset-lib-repo"]
+	path = thirdparty/godot-xterm-asset-lib-repo
+	url = https://github.com/lihop/godot-xterm-asset-lib-repo

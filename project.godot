@@ -44,6 +44,10 @@ Player="*res://singletons/player.gd"
 
 enabled=PoolStringArray( "SIsilicon.3d.text", "godot_xterm" )
 
+[gdnative]
+
+singletons=[ "res://pythonscript.gdnlib" ]
+
 [input]
 
 console_mode_move={

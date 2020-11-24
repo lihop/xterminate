@@ -1,12 +1,13 @@
-
 # Godot-specific ignores
 .import/
 export.cfg
-export_presets.cfg
 
 # Mono-specific ignores
 .mono/
 mono_crash.*.json
+
+# Python-specific ignores
+__pycache__/
 
 # Blender-specific ignores
 *.blend?
@@ -16,3 +17,4 @@ mono_crash.*.json
 
 # Other igonres
 .vscode/include/*
+export/
