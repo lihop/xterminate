@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/godot_xterm/nodes/terminal/terminal.gdns" type="Script" id=1]
 [ext_resource path="res://characters/player/console/console.gd" type="Script" id=2]
 [ext_resource path="res://addons/godot_xterm/themes/default.theme" type="Theme" id=3]
+[ext_resource path="res://characters/player/console/console_app.py" type="Script" id=4]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -34,6 +35,11 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="App" type="Node" parent="."]
+script = ExtResource( 4 )
+terminal_path = NodePath("../Panel/Terminal")
+redirect_stdout = false
 
 [node name="Panel" type="Panel" parent="."]
 anchor_left = 0.5

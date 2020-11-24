@@ -7,6 +7,8 @@ var parser := CommandParser.new()
 var commands := BashLikeCommands.new()
 var awaiting_confirmation := false
 
+
+onready var app = $App
 onready var terminal = $Panel/Terminal
 
 
@@ -27,13 +29,25 @@ func format_date_time():
 	return dateRFC1123
 
 
+func send_ctrl_c():
+	var initially_focused = terminal.has_focus()
+	var ctrl_c = InputEventKey.new()
+	ctrl_c.control = true
+	ctrl_c.scancode = KEY_ENTER
+	focus_terminal()
+	get_tree().input_event(ctrl_c)
+	if not initially_focused:
+		unfocus_terminal()
+
+
 func message(message: String, user := "root", host := "godot", term := "tty/0"):
 	var time = OS.get_time()
 	
 	pause()
 	get_tree().paused = true
 	
-	# TODO: Stop repl.
+	# Send a ctrl-c to cancel anything in the terminal.
+	send_ctrl_c()
 	terminal.write("\r\n\r\n")
 	terminal.write("Broadcast message from %s@%s (%s) (%s):" \
 			% [user, host, term, format_date_time()])
@@ -43,48 +57,50 @@ func message(message: String, user := "root", host := "godot", term := "tty/0"):
 
 
 func _ready():
-	terminal.write("\u001b[20h")
 	Player.connect("entered_move_mode", self, "_on_player_entered_move_mode", [], CONNECT_DEFERRED)
 	Player.connect("entered_insert_mode", self, "_on_player_entered_insert_mode", [], CONNECT_DEFERRED)
-	prompt()
 
 
 func _on_player_entered_insert_mode():
+	focus_terminal()
+
+
+func focus_terminal():
 	terminal.focus_mode = FOCUS_ALL
 	terminal.grab_focus()
 
 
 func _on_player_entered_move_mode():
+	unfocus_terminal()
+
+
+func unfocus_terminal():
 	terminal.release_focus()
 	terminal.focus_mode = FOCUS_NONE
 
 
-func prompt(prompt := Player.prompt) -> void:
-	terminal.write(prompt)
-
-
 func _on_Terminal_data_sent(data: PoolByteArray):
-	var string = data.get_string_from_utf8()
-	
-	match string:
-		"\t":
-			pass # TODO auto-completion
-		"\b":
-			if not buffer.empty():
-				buffer.erase(buffer.length() - 1, 1)
-				terminal.write("\b\u001b[K")
-		"\r\n":
-			terminal.write("\r\n")
-			var result := parser.tokenize(buffer)
-			buffer.erase(0, buffer.length())
-			print(result)
-			var stdout := parser.execute(result, [self, commands], "%s\r\n")
-			terminal.write(stdout)
-			terminal.write("\r\n")
-			prompt()
-		_:
-			terminal.write(string)
-			buffer += string
+	return
+#	var string = data.get_string_from_utf8()
+#
+#	match string:
+#		"\t":
+#			pass # TODO auto-completion
+#		"\b":
+#			if not buffer.empty():
+#				buffer.erase(buffer.length() - 1, 1)
+#				terminal.write("\b\u001b[K")
+#		"\r\n":
+#			terminal.write("\r\n")
+#			var result := parser.tokenize(buffer)
+#			buffer.erase(0, buffer.length())
+#			print(result)
+#			var stdout := parser.execute(result, [self, commands], "%s\r\n")
+#			terminal.write(stdout)
+#			terminal.write("\r\n")
+#		_:
+#			terminal.write(string)
+#			buffer += string
 
 
 func _on_Terminal_key_pressed(_data, event: InputEventKey):
@@ -109,4 +125,3 @@ func unpause() -> void:
 	awaiting_confirmation = false
 	get_tree().paused = false
 	material.set_shader_param("on", false)
-	prompt()
