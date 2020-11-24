@@ -5,6 +5,9 @@ var buffer := ""
 
 var parser := CommandParser.new()
 var commands := BashLikeCommands.new()
+var awaiting_confirmation := false
+
+onready var terminal = $Panel/Terminal
 
 
 func format_date_time():
@@ -24,39 +27,40 @@ func format_date_time():
 	return dateRFC1123
 
 
-func message(message: String, user := "root", host := "godot", terminal := "tty/0"):
+func message(message: String, user := "root", host := "godot", term := "tty/0"):
 	var time = OS.get_time()
 	
+	pause()
+	get_tree().paused = true
+	
 	# TODO: Stop repl.
-	$Terminal.write("\r\n\r\n")
-	$Terminal.write("Broadcast message from %s@%s (%s) (%s):" \
-			% [user, host, terminal, format_date_time()])
-	$Terminal.write("\r\n\r\n")
-	$Terminal.write(message)
-	$Terminal.write("\r\n")
-	prompt()
-	$Terminal.write(buffer)
+	terminal.write("\r\n\r\n")
+	terminal.write("Broadcast message from %s@%s (%s) (%s):" \
+			% [user, host, term, format_date_time()])
+	terminal.write("\r\n\r\n")
+	terminal.write(message)
+	terminal.write("\r\n")
 
 
 func _ready():
-	$Terminal.write("\u001b[20h")
+	terminal.write("\u001b[20h")
 	Player.connect("entered_move_mode", self, "_on_player_entered_move_mode", [], CONNECT_DEFERRED)
 	Player.connect("entered_insert_mode", self, "_on_player_entered_insert_mode", [], CONNECT_DEFERRED)
 	prompt()
 
 
 func _on_player_entered_insert_mode():
-	$Terminal.focus_mode = FOCUS_ALL
-	$Terminal.grab_focus()
+	terminal.focus_mode = FOCUS_ALL
+	terminal.grab_focus()
 
 
 func _on_player_entered_move_mode():
-	$Terminal.release_focus()
-	$Terminal.focus_mode = FOCUS_NONE
+	terminal.release_focus()
+	terminal.focus_mode = FOCUS_NONE
 
 
 func prompt(prompt := Player.prompt) -> void:
-	$Terminal.write(prompt)
+	terminal.write(prompt)
 
 
 func _on_Terminal_data_sent(data: PoolByteArray):
@@ -68,18 +72,18 @@ func _on_Terminal_data_sent(data: PoolByteArray):
 		"\b":
 			if not buffer.empty():
 				buffer.erase(buffer.length() - 1, 1)
-				$Terminal.write("\b\u001b[K")
+				terminal.write("\b\u001b[K")
 		"\r\n":
-			$Terminal.write("\r\n")
+			terminal.write("\r\n")
 			var result := parser.tokenize(buffer)
 			buffer.erase(0, buffer.length())
 			print(result)
 			var stdout := parser.execute(result, [self, commands], "%s\r\n")
-			$Terminal.write(stdout)
-			$Terminal.write("\r\n")
+			terminal.write(stdout)
+			terminal.write("\r\n")
 			prompt()
 		_:
-			$Terminal.write(string)
+			terminal.write(string)
 			buffer += string
 
 
@@ -89,3 +93,20 @@ func _on_Terminal_key_pressed(_data, event: InputEventKey):
 #
 #	if event.scancode == KEY_ENTER:
 #		print('enter pressed')
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("continue") and awaiting_confirmation:
+		unpause()
+
+
+func pause() -> void:
+	material.set_shader_param("on", true)
+	get_tree().paused = true
+	awaiting_confirmation = true
+
+
+func unpause() -> void:
+	awaiting_confirmation = false
+	get_tree().paused = false
+	material.set_shader_param("on", false)
+	prompt()
