@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/SIsilicon.3d.text/array_utils.gd"
 }, {
+"base": "Reference",
+"class": "BashLikeCommands",
+"language": "GDScript",
+"path": "res://addons/gd_tokenizer/BashLikeCommands.gd"
+}, {
+"base": "Reference",
+"class": "CommandParser",
+"language": "GDScript",
+"path": "res://addons/gd_tokenizer/CommandParser.gd"
+}, {
 "base": "MeshInstance",
 "class": "Decal",
 "language": "GDScript",
@@ -26,7 +36,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ArrayUtils": "",
-"Decal": "",
+"BashLikeCommands": "",
+"CommandParser": "",
+"Decal": "res://decalco/icons/icon_decal.svg",
 "TPut": ""
 }
 

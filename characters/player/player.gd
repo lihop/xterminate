@@ -6,6 +6,7 @@ const DECELERATION := 20
 
 var gravity := Vector3.DOWN * 0.1
 var velocity := Vector3.ZERO
+var time := 0.0
 
 
 func _physics_process(delta: float) -> void:
@@ -13,18 +14,19 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector3.ZERO
 	var is_moving := false
 	
-	if Input.is_action_pressed("move_left") and $RayCastLeft.is_colliding():
-		direction -= transform.basis.x
-		is_moving = true
-	if Input.is_action_pressed("move_right") and $RayCastRight.is_colliding():
-		direction += transform.basis.x
-		is_moving = true
-	if Input.is_action_pressed("move_up") and $RayCastForward.is_colliding():
-		direction -= transform.basis.z
-		is_moving = true
-	if Input.is_action_pressed("move_down") and $RayCastBackward.is_colliding():
-		direction += transform.basis.z
-		is_moving = true
+	if Player.console_mode == Player.CONSOLE_MODE_MOVE:
+		if Input.is_action_pressed("move_left") and $RayCastLeft.is_colliding():
+			direction -= transform.basis.x
+			is_moving = true
+		if Input.is_action_pressed("move_right") and $RayCastRight.is_colliding():
+			direction += transform.basis.x
+			is_moving = true
+		if Input.is_action_pressed("move_up") and $RayCastForward.is_colliding():
+			direction -= transform.basis.z
+			is_moving = true
+		if Input.is_action_pressed("move_down") and $RayCastBackward.is_colliding():
+			direction += transform.basis.z
+			is_moving = true
 	
 	if is_moving and not $FootstepsPlayer.playing:
 		$FootstepsPlayer.play()
@@ -55,10 +57,18 @@ func _physics_process(delta: float) -> void:
 	if is_moving:
 		var angle = atan2(h_velocity.x, h_velocity.z)
 		$Model.rotation.y = angle
-		
 	
-	var speed_normalized = horizontal_velocity.length() / speed
-	$Model/AnimationTreePlayer.blend2_node_set_amount("IdleRun", speed_normalized)
+	if Player.console_mode == Player.CONSOLE_MODE_MOVE:
+		time = 0
+		var speed_normalized = horizontal_velocity.length() / speed
+		$Model/IdleWorkingAnimation.active = false
+		$Model/IdleRunAnimation.active = true
+		$Model/IdleRunAnimation.blend2_node_set_amount("IdleRun", speed_normalized)
+	elif Player.console_mode == Player.CONSOLE_MODE_INSERT:
+		time += (delta * 4)
+		$Model/IdleRunAnimation.active = false
+		$Model/IdleWorkingAnimation.active = true
+		$Model/IdleWorkingAnimation.blend2_node_set_amount("IdleWorking", min(time, 1))
 
 
 func _input(event: InputEvent) -> void:
@@ -66,8 +76,6 @@ func _input(event: InputEvent) -> void:
 		Player.CONSOLE_MODE_INSERT:
 			if event.is_action_pressed("console_mode_move"):
 				Player.console_mode = Player.CONSOLE_MODE_MOVE
-				set_physics_process(true)
 		Player.CONSOLE_MODE_MOVE, _:
 			if event.is_action_pressed("console_mode_insert"):
-				set_physics_process(true)
 				Player.console_mode = Player.CONSOLE_MODE_INSERT

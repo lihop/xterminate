@@ -1,0 +1,43 @@
+name: build
+
+on: [push]
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        preset: [ x11-64, osx-64, windows-64 ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+          submodules: recursive
+      - name: Export project
+        uses: lihop/build-godot-action@v1.4.2
+        with:
+          name: xterminate
+          preset: ${{ matrix.preset }}
+          subdirectory: export/${{ matrix.preset }}
+      - name: Export project ZIP file
+        uses: lihop/build-godot-action@v1.4.2
+        with:
+          name: xterminate.zip
+          preset: ${{ matrix.preset }}
+          subdirectory: export/${{ matrix.preset }}
+      - name: Repackage with godot-python and dependencies
+        run: |
+          ls -alR .
+
+
+
+
+            #      - name: Upload build artifacts
+            #        uses: actions/upload-artifact@v2
+            #        with:
+            #          name: libgodot-xterm-${{ matrix.target }}
+            #          path: |
+            #            addons/godot_xterm/native/bin/*.so
+            #            addons/godot_xterm/native/bin/*.dylib
+            #            addons/godot_xterm/native/bin/*.dll
+
