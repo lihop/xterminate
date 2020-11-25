@@ -30,6 +30,7 @@ from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.styles import Style
 from prompt_toolkit.key_binding import KeyBindings
+from prompt_toolkit.shortcuts import CompleteStyle
 
 
 def complete_files(curr_arg,path=None):
@@ -132,7 +133,7 @@ class PtkCmd():
 			else:
 				if self.interactive:
 					try:
-						line = self.psession.prompt(self.prompt)
+						line = self.psession.prompt(self.prompt, complete_style=CompleteStyle.READLINE_LIKE)
 						if line is None:
 							stop = True
 							break
