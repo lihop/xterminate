@@ -31,6 +31,7 @@ pause_mode = 2
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,7 +40,7 @@ __meta__ = {
 [node name="App" type="Node" parent="."]
 script = ExtResource( 4 )
 terminal_path = NodePath("../Panel/Terminal")
-redirect_stdout = false
+redirect_stderr = true
 
 [node name="Panel" type="Panel" parent="."]
 anchor_left = 0.5
@@ -50,6 +51,7 @@ margin_left = -477.0
 margin_top = -265.0
 margin_right = 477.0
 margin_bottom = -50.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -66,7 +68,3 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-rows = 10
-cols = 94
-[connection signal="data_sent" from="Panel/Terminal" to="." method="_on_Terminal_data_sent"]
-[connection signal="key_pressed" from="Panel/Terminal" to="." method="_on_Terminal_key_pressed"]

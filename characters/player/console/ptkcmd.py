@@ -26,6 +26,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import sys, string, shlex, textwrap, os, os.path
+from expandvars import expandvars
 from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import Completer, Completion
 from prompt_toolkit.styles import Style
@@ -128,28 +129,34 @@ class PtkCmd():
 			self.stdout.write(str(self.intro)+"\n")
 		stop = None
 		while not stop:
-			if len(self.cmdqueue) > 0:
-				line = self.cmdqueue.pop(0)
-			else:
-				if self.interactive:
-					try:
-						line = self.psession.prompt(self.prompt, complete_style=CompleteStyle.READLINE_LIKE)
-						if line is None:
-							stop = True
-							break
-					except EOFError:
-						line = ''
+			try:
+				if len(self.cmdqueue) > 0:
+					line = self.cmdqueue.pop(0)
 				else:
-					self.stdout.write(self.prompt)
-					self.stdout.flush()
-					line = self.stdin.readline()
-					if not len(line):
-						line = ''
+					if self.interactive:
+						try:
+							line = self.psession.prompt(self.prompt, complete_style=CompleteStyle.READLINE_LIKE)
+							if line is None:
+								stop = True
+								break
+						except KeyboardInterrupt:
+							continue
+						except EOFError:
+							line = ''
 					else:
-						line = line.rstrip('\r\n')
-			line = self.precmd(line)
-			stop = self.onecmd(line)
-			stop = self.postcmd(stop, line)
+						self.stdout.write(self.prompt)
+						self.stdout.flush()
+						line = self.stdin.readline()
+						if not len(line):
+							line = ''
+						else:
+							line = line.rstrip('\r\n')
+				line = self.precmd(line)
+				stop = self.onecmd(line)
+				stop = self.postcmd(stop, line)
+			except:
+				print("error!!!")
+				continue
 		self.postloop()
 
 	def preloop(self):
@@ -157,14 +164,14 @@ class PtkCmd():
 	def precmd(self,line):
 		return line
 	def onecmd(self, line):
-		line = line.strip()
+		line = expandvars(line.strip())
 		cmd_args = shlex.split(line)
 		if len(cmd_args) == 0:
 			return
 		cmd = cmd_args[0]
 		self.lastcmd = line
 		if hasattr(self,'do_'+cmd):
-			return getattr(self,'do_'+cmd)(*cmd_args[1:])
+			return getattr(self,'do_'+cmd)(cmd_args[1:])
 		else:
 			return self.default(cmd_args,line)
 
