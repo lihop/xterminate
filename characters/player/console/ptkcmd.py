@@ -129,34 +129,34 @@ class PtkCmd():
 			self.stdout.write(str(self.intro)+"\n")
 		stop = None
 		while not stop:
-			try:
-				if len(self.cmdqueue) > 0:
-					line = self.cmdqueue.pop(0)
+#			try:
+			if len(self.cmdqueue) > 0:
+				line = self.cmdqueue.pop(0)
+			else:
+				if self.interactive:
+					try:
+						line = self.psession.prompt(self.prompt, complete_style=CompleteStyle.READLINE_LIKE)
+						if line is None:
+							stop = True
+							break
+					except KeyboardInterrupt:
+						continue
+					except EOFError:
+						line = ''
 				else:
-					if self.interactive:
-						try:
-							line = self.psession.prompt(self.prompt, complete_style=CompleteStyle.READLINE_LIKE)
-							if line is None:
-								stop = True
-								break
-						except KeyboardInterrupt:
-							continue
-						except EOFError:
-							line = ''
+					self.stdout.write(self.prompt)
+					self.stdout.flush()
+					line = self.stdin.readline()
+					if not len(line):
+						line = ''
 					else:
-						self.stdout.write(self.prompt)
-						self.stdout.flush()
-						line = self.stdin.readline()
-						if not len(line):
-							line = ''
-						else:
-							line = line.rstrip('\r\n')
-				line = self.precmd(line)
-				stop = self.onecmd(line)
-				stop = self.postcmd(stop, line)
-			except:
-				print("error!!!")
-				continue
+						line = line.rstrip('\r\n')
+			line = self.precmd(line)
+			stop = self.onecmd(line)
+			stop = self.postcmd(stop, line)
+#			except:
+#				print("error!!!")
+#				continue
 		self.postloop()
 
 	def preloop(self):
