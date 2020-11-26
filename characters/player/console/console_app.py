@@ -56,8 +56,24 @@ class ConsoleCmd(PtkCmd):
 					print("rm: cannot remove '%s': No such file or directory" % file)
 	
 	
+	__ls_parser = argparse.ArgumentParser(prog="ls")
+	__ls_parser.add_argument("FILE", nargs="?", default=".")
+	__ls_parser.add_argument("-a", "--all", action='store_true', help="do not ignore entries start with .")
+	__ls_parser.add_argument("-A", "--almost-all", action='store_true', help="do not list implived . and ..")
+	__ls_parser.add_argument("-l", action='store_true', help="use long listing format")
 	def do_ls(self, args):
-		print('TODO: Implement ls')
+		try:
+			parsed = self.__ls_parser.parse_args(args)
+		except SystemExit:
+			return
+		
+		filename = parsed.FILE
+		absolute = filename.startswith('/')
+		
+		if not absolute:
+			with self.process_lock:
+				self.process_started.wait()
+				current_scene = get_tree().get_current_scene().get_node("File")
 	
 	
 	def do_chmod(self, args):
@@ -66,6 +82,20 @@ class ConsoleCmd(PtkCmd):
 	
 	def do_cd(self, args):
 		print('TODO: Implement cd')
+	
+	
+	__pwd_parser = argparse.ArgumentParser(prog="pwd", description="print name of current/working directory")
+	def do_pwd(self, args):
+		try:
+			parsed = self.__pwd_parser.parse_args(args)
+		except SystemExit:
+			return
+		
+		with self.process_lock:
+			self.process_started.wait()
+			current_scene = self.node.get_tree().get_current_scene()
+			path_name = current_scene.get("path_name")
+		print(path_name)
 
 
 @exposed

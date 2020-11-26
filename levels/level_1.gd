@@ -1,4 +1,4 @@
-extends Spatial
+extends PosixFile
 
 
 signal continue_level()
@@ -9,6 +9,7 @@ var entered_door_area := false
 
 
 func _ready():
+	return
 	$Part2.transition_in()
 	yield(get_tree().create_timer(3), "timeout")
 	console.message("Use 'h' 'j' 'k' 'l' to move\r\n\nPress ENTER to continue")

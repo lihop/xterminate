@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://decalco/src/Decal.gd"
 }, {
+"base": "Node",
+"class": "PosixFile",
+"language": "GDScript",
+"path": "res://system/fs/posix_file.gd"
+}, {
 "base": "Reference",
 "class": "TPut",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "BashLikeCommands": "",
 "CommandParser": "",
 "Decal": "res://decalco/icons/icon_decal.svg",
+"PosixFile": "",
 "TPut": ""
 }
 
