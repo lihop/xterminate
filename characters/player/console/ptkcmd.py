@@ -157,6 +157,7 @@ class PtkCmd():
 #			except:
 #				print("error!!!")
 #				continue
+			self.stdout.flush()
 		self.postloop()
 
 	def preloop(self):

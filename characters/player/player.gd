@@ -77,6 +77,8 @@ func _input(event: InputEvent) -> void:
 		Player.CONSOLE_MODE_INSERT:
 			if event.is_action_pressed("console_mode_move"):
 				Player.console_mode = Player.CONSOLE_MODE_MOVE
+				$Model/Laptop.visible = false
 		Player.CONSOLE_MODE_MOVE, _:
 			if event.is_action_pressed("console_mode_insert"):
 				Player.console_mode = Player.CONSOLE_MODE_INSERT
+				$Model/Laptop.visible = true
