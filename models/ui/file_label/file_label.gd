@@ -1,16 +1,15 @@
-tool
-extends "res://addons/SIsilicon.3d.text/label_3d.gd"
-
-
-export var billboard := false setget set_billboard
+extends Position3D
 
 
 func _ready():
-	if billboard and material:
-		material.set_shader_param("billboard", billboard)
+	var parent = get_parent()
+	if parent is PosixFile:
+		set_process(true)
+	else:
+		set_process(false)
 
 
-func set_billboard(value: bool) -> void:
-	billboard = value
-	if material:
-		material.set_shader_param("billboard", value)
+func _process(_delta):
+	var camera := get_viewport().get_camera()
+	if camera:
+		$Label.position = camera.unproject_position(transform.origin)

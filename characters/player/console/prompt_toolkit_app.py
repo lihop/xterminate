@@ -58,7 +58,7 @@ class PromptToolkitApp(Node):
 		if self.focused:
 			self.terminal.grab_focus()
 		
-		self.stdout = Stdout(writefunc=self.terminal.write)
+		self.stdout = Stdout(writefunc=self._terminal_write)
 		self.output = Vt100_Output(stdout=self.stdout,
 				get_size=self._get_terminal_size, write_binary=False)
 		
@@ -91,6 +91,10 @@ class PromptToolkitApp(Node):
 			self.app._on_resize()
 		except AttributeError:
 			pass
+	
+	def _terminal_write(self, data):
+		self.terminal.write(data)
+		self.terminal.update()
 	
 	def _exit_tree(self):
 		self.input.send_bytes(b'\x04') # Sends EOF to input (i.e. typing ctrl+D)

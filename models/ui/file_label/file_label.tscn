@@ -1,19 +1,27 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://models/ui/file_label/file_label.gd" type="Script" id=1]
 
-[node name="Label3D" type="Spatial"]
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
+[node name="FileLabel" type="Sprite3D"]
+flip_v = true
+texture = SubResource( 1 )
 script = ExtResource( 1 )
-billboard = true
-text = "Text"
-text_size = 1.0
-font = null
-align = 0
-color = Color( 0.6, 0.6, 0.6, 1 )
-metallic = 0.0
-roughness = 0.5
-emission_color = Color( 1, 1, 1, 1 )
-emission_strength = 0.0
-extrude = 0.0
-max_steps = 256
-step_size = 1.0
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 50, 50 )
+own_world = true
+transparent_bg = true
+
+[node name="Label" type="Label" parent="Viewport"]
+margin_right = 34.0
+margin_bottom = 14.0
+text = "Linux is the best"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="resized" from="Viewport/Label" to="." method="_on_Label_resized"]

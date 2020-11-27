@@ -57,9 +57,9 @@ class ConsoleCmd(PtkCmd):
 	
 	
 	__ls_parser = argparse.ArgumentParser(prog="ls")
-	__ls_parser.add_argument("FILE", nargs="?", default=".")
+	#__ls_parser.add_argument("FILE", nargs="?", default=".")
 	__ls_parser.add_argument("-a", "--all", action='store_true', help="do not ignore entries start with .")
-	__ls_parser.add_argument("-A", "--almost-all", action='store_true', help="do not list implived . and ..")
+	__ls_parser.add_argument("-A", "--almost-all", action='store_true', help="do not list implied . and ..")
 	__ls_parser.add_argument("-l", action='store_true', help="use long listing format")
 	def do_ls(self, args):
 		try:
@@ -67,13 +67,12 @@ class ConsoleCmd(PtkCmd):
 		except SystemExit:
 			return
 		
-		filename = parsed.FILE
-		absolute = filename.startswith('/')
-		
-		if not absolute:
-			with self.process_lock:
-				self.process_started.wait()
-				current_scene = get_tree().get_current_scene().get_node("File")
+		with self.process_lock:
+			self.process_started.wait()
+			current_scene = self.node.get_tree().get_current_scene()
+			children = current_scene.get_children_files()
+			for child in children:
+				print(child.get("file_name"))
 	
 	
 	def do_chmod(self, args):

@@ -51,7 +51,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Xterminate"
-run/main_scene="res://levels/level_1.tscn"
+run/main_scene="res://levels/level_1/level_1.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -61,7 +61,7 @@ Player="*res://singletons/player.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SIsilicon.3d.text", "godot_xterm" )
+enabled=PoolStringArray( "SIsilicon.3d.text", "godot_xterm", "gut" )
 
 [gdnative]
 
