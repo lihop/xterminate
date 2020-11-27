@@ -122,7 +122,10 @@ func get_file_type() -> int:
 
 
 func get_path_name() -> String:
-	return "%s/%s" % [dir_name, file_name]
+	if dir_name == "/":
+		return "/%s" % file_name
+	else:
+		return "%s/%s" % [dir_name, file_name]
 
 
 func is_class(type: String):
@@ -143,11 +146,33 @@ func _ready():
 
 
 func _get_parent_file_or_null(node: Node = self):
-	var parent = get_node_or_null("..")
+	var parent = node.get_node_or_null("..")
+	var grandparent = node.get_node_or_null("../..")
 	
-	if parent and parent.is_class(get_class()):
-		return parent
-	elif parent and parent != get_node("/root"):
-		return _get_parent_file_or_null(parent)
-	else:
+	if not parent or not grandparent:
 		return null
+	elif parent and grandparent:
+		for child in grandparent.get_children():
+			if child != parent && child.is_class(get_class()):
+				return child
+	
+	return _get_parent_file_or_null(parent)
+#
+#	if not parent or not grandparent:
+#		return null
+#	else:
+#		return null
+#		for child in grandparent.get_children():
+#			if child != parent and child.is_class(get_class()):
+#				return child
+	
+	#return _get_parent_file_or_null(grandparent)
+
+
+func get_children_files(node: Node = self, children := []) -> Array:
+	for child in node.get_children():
+		if child.is_class(get_class()):
+			children.append(child)
+		else:
+			get_children_files(child, children)
+	return children

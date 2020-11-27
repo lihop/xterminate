@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://system/fs/posix_file.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+[node name="Directory0" type="Spatial"]
+script = SubResource( 1 )
+
+[node name="PosixFile" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Directory1" type="Spatial" parent="."]
+
+[node name="PosixFile" type="Node" parent="Directory1"]
+script = ExtResource( 2 )
+file_name = "Directory1"
+
+[node name="File1_1" type="Spatial" parent="Directory1"]
+
+[node name="PosixFile" type="Node" parent="Directory1/File1_1"]
+script = ExtResource( 2 )
+file_name = "File1_1"
+
+[node name="Directory1_1" type="Spatial" parent="Directory1"]
+
+[node name="PosixFile" type="Node" parent="Directory1/Directory1_1"]
+script = ExtResource( 2 )
+file_name = "Directory1_1"
+
+[node name="File1_1_1" type="Spatial" parent="Directory1/Directory1_1"]
+
+[node name="PosixFile" type="Node" parent="Directory1/Directory1_1/File1_1_1"]
+script = ExtResource( 2 )
+file_name = "File1_1_1"
+
+[node name="File1" type="Spatial" parent="."]
+
+[node name="PosixFile" type="Node" parent="File1"]
+script = ExtResource( 2 )
+file_name = "File1"
+
+[node name="Spatial" type="Spatial" parent="."]
+
+[node name="Spatial" type="Spatial" parent="Spatial"]
+
+[node name="Spatial" type="Spatial" parent="Spatial/Spatial"]
+
+[node name="Directory2" type="Spatial" parent="Spatial/Spatial/Spatial"]
+
+[node name="PosixFile" type="Node" parent="Spatial/Spatial/Spatial/Directory2"]
+script = ExtResource( 2 )
+file_name = "Directory2"
+
+[node name="Spatial" type="Spatial" parent="Spatial/Spatial/Spatial/Directory2"]
+
+[node name="Spatial" type="Spatial" parent="Spatial/Spatial/Spatial/Directory2/Spatial"]
+
+[node name="Spatial" type="Spatial" parent="Spatial/Spatial/Spatial/Directory2/Spatial/Spatial"]
+
+[node name="File2_1" type="Spatial" parent="Spatial/Spatial/Spatial/Directory2/Spatial/Spatial/Spatial"]
+
+[node name="PosixFile" type="Node" parent="Spatial/Spatial/Spatial/Directory2/Spatial/Spatial/Spatial/File2_1"]
+script = ExtResource( 2 )
+file_name = "File2_1"
+
+[node name="AbsoluteDirectory1" type="Spatial" parent="."]
+
+[node name="PosixFile" type="Node" parent="AbsoluteDirectory1"]
+script = ExtResource( 2 )
+file_name = "AbsoluteDirectory1"
+dir_name = "/some/other/path"
+
+[node name="AbsoluteFile1" type="Spatial" parent="AbsoluteDirectory1"]
+
+[node name="PosixFile" type="Node" parent="AbsoluteDirectory1/AbsoluteFile1"]
+script = ExtResource( 2 )
+file_name = "AbsoluteFile1"
+
+[node name="Spatial" type="Spatial" parent="AbsoluteDirectory1"]
+
+[node name="Spatial" type="Spatial" parent="AbsoluteDirectory1/Spatial"]
+
+[node name="Spatial" type="Spatial" parent="AbsoluteDirectory1/Spatial/Spatial"]
+
+[node name="AbsoluteFile2" type="Spatial" parent="AbsoluteDirectory1/Spatial/Spatial/Spatial"]
+
+[node name="PosixFile" type="Node" parent="AbsoluteDirectory1/Spatial/Spatial/Spatial/AbsoluteFile2"]
+script = ExtResource( 2 )
+file_name = "AbsoluteFile2"

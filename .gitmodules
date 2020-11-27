@@ -19,3 +19,6 @@
 [submodule "thirdparty/godot-xterm-asset-lib-repo"]
 	path = thirdparty/godot-xterm-asset-lib-repo
 	url = https://github.com/lihop/godot-xterm-asset-lib-repo
+[submodule "thirdparty/Gut"]
+	path = thirdparty/gut
+	url = https://github.com/bitwes/Gut
