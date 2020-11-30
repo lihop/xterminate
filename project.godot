@@ -29,23 +29,59 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://decalco/src/Decal.gd"
 }, {
+"base": "Reference",
+"class": "FrustumAABBIntersection",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/frustum_aabb_intersection.gd"
+}, {
+"base": "Reference",
+"class": "Halton",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/halton.gd"
+}, {
+"base": "Reference",
+"class": "Matrix4",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/matrix4.gd"
+}, {
 "base": "Node",
 "class": "PosixFile",
 "language": "GDScript",
 "path": "res://system/fs/posix_file.gd"
 }, {
+"base": "Node",
+"class": "SceneBounds",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/scene_bounds.gd"
+}, {
 "base": "Reference",
 "class": "TPut",
 "language": "GDScript",
 "path": "res://addons/godot_xterm/util/tput.gd"
+}, {
+"base": "ShaderMaterial",
+"class": "TransparentVolumeOverlay",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/material/transparent_volume_overlayer.gd"
+}, {
+"base": "Resource",
+"class": "VolumetricMaterial",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/material/volumetric_material.gd"
 } ]
 _global_script_class_icons={
 "ArrayUtils": "",
 "BashLikeCommands": "",
 "CommandParser": "",
 "Decal": "res://decalco/icons/icon_decal.svg",
+"FrustumAABBIntersection": "",
+"Halton": "",
+"Matrix4": "",
 "PosixFile": "",
-"TPut": ""
+"SceneBounds": "",
+"TPut": "",
+"TransparentVolumeOverlay": "",
+"VolumetricMaterial": "res://addons/silicon.vfx.volumetrics/material/volumetric_material.svg"
 }
 
 [application]
@@ -58,10 +94,11 @@ config/icon="res://icon.png"
 
 System="*res://system/system.tscn"
 Player="*res://singletons/player.gd"
+VolumetricServer="*res://addons/silicon.vfx.volumetrics/volumetric_server.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "SIsilicon.3d.text", "godot_xterm", "gut" )
+enabled=PoolStringArray( "SIsilicon.3d.text", "godot_xterm", "gut", "silicon.vfx.volumetrics" )
 
 [gdnative]
 

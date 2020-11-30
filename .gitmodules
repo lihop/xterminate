@@ -22,3 +22,6 @@
 [submodule "thirdparty/Gut"]
 	path = thirdparty/gut
 	url = https://github.com/bitwes/Gut
+[submodule "thirdparty/Godot-Volumetrics-Plugin"]
+	path = thirdparty/silicon.vfx.volumetrics
+	url = https://github.com/SIsilicon/Godot-Volumetrics-Plugin

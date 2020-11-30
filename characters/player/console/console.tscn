@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/godot_xterm/nodes/terminal/terminal.gdns" type="Script" id=1]
 [ext_resource path="res://characters/player/console/console.gd" type="Script" id=2]
@@ -26,6 +26,9 @@ void fragment() {
 shader = SubResource( 1 )
 shader_param/on = false
 
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.960784, 0.960784, 0.862745, 1 )
+
 [node name="Console" type="ColorRect"]
 pause_mode = 2
 material = SubResource( 2 )
@@ -52,6 +55,7 @@ margin_top = -265.0
 margin_right = 477.0
 margin_bottom = -50.0
 mouse_filter = 1
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,5 +72,5 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-rows = 10
-cols = 94
+rows = 14
+cols = 72

@@ -1,3 +1,4 @@
 expandvars==0.6.5
 olipy==1.0.4
 prompt_toolkit==3.0.8
+git+https://github.com/will8211/unimatrix.git@75f7402e8b0c0c61b39bd7cb4d5679e2eebddc5c

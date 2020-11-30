@@ -1,42 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/godot_xterm/nodes/terminal/terminal.gdns" type="Script" id=1]
-[ext_resource path="res://misc/fonts/unifont.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/godot_xterm/themes/default_dark.theme" type="Theme" id=2]
 [ext_resource path="res://models/decoration/artwork/artwork.py" type="Script" id=3]
 
-[sub_resource type="DynamicFont" id=7]
-size = 48
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=8]
-default_font = SubResource( 7 )
-Terminal/colors/Background = Color( 0, 0, 0, 1 )
-Terminal/colors/Black = Color( 0, 0, 0, 1 )
-Terminal/colors/Blue = Color( 0, 0, 0.501961, 1 )
-Terminal/colors/Cyan = Color( 0, 0.501961, 0.501961, 1 )
-"Terminal/colors/Dark Grey" = Color( 0.501961, 0.501961, 0.501961, 1 )
-Terminal/colors/Foreground = Color( 1, 1, 1, 1 )
-Terminal/colors/Green = Color( 0, 0.501961, 0, 1 )
-"Terminal/colors/Light Blue" = Color( 0, 0, 1, 1 )
-"Terminal/colors/Light Cyan" = Color( 0, 1, 1, 1 )
-"Terminal/colors/Light Green" = Color( 0, 1, 0, 1 )
-"Terminal/colors/Light Grey" = Color( 0.752941, 0.752941, 0.752941, 1 )
-"Terminal/colors/Light Magenta" = Color( 1, 0, 1, 1 )
-"Terminal/colors/Light Red" = Color( 1, 0, 0, 1 )
-"Terminal/colors/Light Yellow" = Color( 1, 1, 0, 1 )
-Terminal/colors/Magenta = Color( 0.501961, 0, 0.501961, 1 )
-Terminal/colors/Red = Color( 0.501961, 0, 0, 1 )
-Terminal/colors/White = Color( 1, 1, 1, 1 )
-Terminal/colors/Yellow = Color( 0.501961, 0.501961, 0, 1 )
-Terminal/fonts/Bold = null
-"Terminal/fonts/Bold Italic" = null
-Terminal/fonts/Italic = null
-Terminal/fonts/Regular = null
-
-[sub_resource type="ViewportTexture" id=6]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
 
-[sub_resource type="BoxShape" id=9]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 4.5, 4, 7 )
 
 [node name="Artwork" type="Spatial"]
@@ -44,22 +15,27 @@ script = ExtResource( 3 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 400, 400 )
-size_override_stretch = true
+handle_input_locally = false
+keep_3d_linear = true
 
 [node name="Terminal" type="Control" parent="Viewport"]
 margin_right = 400.0
 margin_bottom = 400.0
-theme = SubResource( 8 )
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
-rows = 28
-cols = 30
+rows = 21
+cols = 40
 
 [node name="Canvas" type="Sprite3D" parent="."]
 flip_v = true
-texture = SubResource( 6 )
+shaded = true
+texture = SubResource( 1 )
+__meta__ = {
+"apply_volumetrics": false
+}
 
 [node name="Area" type="Area" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-shape = SubResource( 9 )
+shape = SubResource( 2 )
 [connection signal="body_exited" from="Area" to="." method="generate_artwork"]
