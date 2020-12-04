@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/canon-in-d-for-8-bit.ogg-46639111676e80396a4e9a226abcbbc2.oggstr"
+
+[deps]
+
+source_file="res://scenes/main_menu/canon-in-d-for-8-bit.ogg"
+dest_files=[ "res://.import/canon-in-d-for-8-bit.ogg-46639111676e80396a4e9a226abcbbc2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

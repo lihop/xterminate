@@ -1,0 +1,13 @@
+[remap]
+
+importer="godot_xterm"
+type="Animation"
+path="res://.import/cmatrix.cast-a6d703fb3341b670aacfaea47649e807.res"
+
+[deps]
+
+source_file="res://scenes/main_menu/cmatrix.cast"
+dest_files=[ "res://.import/cmatrix.cast-a6d703fb3341b670aacfaea47649e807.res" ]
+
+[params]
+
