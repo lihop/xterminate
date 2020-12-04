@@ -82,6 +82,7 @@ autoplay = "cmatrix"
 anims/cmatrix = ExtResource( 3 )
 
 [node name="Menu" parent="Terminal" instance=ExtResource( 5 )]
-margin_top = -315.0
+margin_top = -311.0
+margin_bottom = 297.0
 theme = SubResource( 5 )
 [connection signal="starting_game" from="Terminal/Menu" to="." method="_on_Menu_starting_game"]

@@ -20,7 +20,6 @@ const TITLE_WIDTH = 42
 
 var menu_items := [
 	{ "name": "Play" },
-	{ "name": "Credits" },
 	{ "name": "Quit" },
 ]
 
@@ -64,8 +63,7 @@ func draw_title():
 	var err = config.load("res://addons/godot_xterm/plugin.cfg")
 	if err == OK:
 		$Terminal.write("\n")
-		$Terminal.write("Version: %s" % config.get_value("plugin", "version",
-				"unknown"))
+		$Terminal.write("Version: 0.0.0-alpha.0")
 	row += 2
 
 
@@ -94,6 +92,19 @@ func draw_menu():
 		
 		if selected_index == i:
 			tput.sgr0()
+	
+	row += 2
+	tput.cup(row, 0)
+	$Terminal.write('"Canon In D For 8 Bit Synths" by Kevin Macleod, from https://incompetech.filmmusic.io/song/6956-canon-in-d-for-8-bit-synths, released under CC-BY 4.0.')
+	row += 3
+	tput.cup(row, 0)
+	$Terminal.write('"Concentration" by Kevin Macleod, from https://incompetech.filmmusic.io/song/3536-concentration, released under CC-BY 4.0.')
+	row += 3
+	tput.cup(row, 0)
+	$Terminal.write('"Running on Ground" by Disagree, from https://freesound.org/people/Disagree/sounds/433725/, released under CC-BY 3.0.')
+	row += 3
+	tput.cup(row, 0)
+	$Terminal.write('"Animated Human Low Poly" by quaternius, from https://opengameart.org/content/animated-human-low-poly, releasend under CC-0.')
 
 
 func _on_Terminal_key_pressed(data: String, event: InputEventKey) -> void:

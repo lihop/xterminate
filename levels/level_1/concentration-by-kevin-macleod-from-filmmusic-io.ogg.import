@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/concentration-by-kevin-macleod-from-filmmusic-io.ogg-ac5a61ccc06d828e48bd7e3fe5eed157.oggstr"
+
+[deps]
+
+source_file="res://levels/level_1/concentration-by-kevin-macleod-from-filmmusic-io.ogg"
+dest_files=[ "res://.import/concentration-by-kevin-macleod-from-filmmusic-io.ogg-ac5a61ccc06d828e48bd7e3fe5eed157.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

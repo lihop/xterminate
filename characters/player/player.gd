@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	horizontal_velocity = horizontal_velocity.linear_interpolate(new_position, acceleration * delta)
 	
 	#var down = 0 if is_on_floor() else -1
-	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
+	velocity = Vector3(horizontal_velocity.x, velocity.y - 1, horizontal_velocity.z)
 	velocity = move_and_slide(velocity, Vector3.UP)
 	
 	var h_velocity = horizontal_velocity

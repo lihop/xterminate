@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/concentration.ogg-cdeaf5cd03eab966d9473b7ee5c995af.oggstr"
+
+[deps]
+
+source_file="res://levels/level_1/concentration.ogg"
+dest_files=[ "res://.import/concentration.ogg-cdeaf5cd03eab966d9473b7ee5c995af.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

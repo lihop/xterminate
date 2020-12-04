@@ -12,7 +12,7 @@ from .prompt_toolkit_app import PromptToolkitApp
 
 
 class ConsoleCmd(PtkCmd):
-	prompt='MyPtkCmd$ ' #change the prompt
+	prompt='[player@godot-game ]$ ' #change the prompt
 	
 	def __init__(self,stdin=None,stdout=None,intro=None,
 		interactive=True,do_complete_cmd=True,
@@ -49,7 +49,7 @@ class ConsoleCmd(PtkCmd):
 		with self.process_lock:
 			self.process_started.wait()
 			for file in parsed.FILE:
-				n = self.node.get_node_or_null("/root/%s" % file)
+				n = self.node.get_node_or_null("/root/" + str(self.node.get_tree().get_current_scene().name) + "/%s" % file)
 				if n:
 					n.queue_free()
 				else:
@@ -69,10 +69,9 @@ class ConsoleCmd(PtkCmd):
 		
 		with self.process_lock:
 			self.process_started.wait()
-			current_scene = self.node.get_tree().get_current_scene()
-			children = current_scene.get_children_files()
-			for child in children:
-				print(child.get("file_name"))
+			cwd = self.node.get_tree().get_current_scene()
+			for child in cwd.get_children():
+				print(child.name)
 	
 	
 	def do_chmod(self, args):

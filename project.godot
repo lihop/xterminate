@@ -87,14 +87,17 @@ _global_script_class_icons={
 [application]
 
 config/name="Xterminate"
-run/main_scene="res://levels/level_1/level_1.tscn"
+run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
+SceneChanger="*res://singletons/scene_changer/scene_changer.tscn"
 System="*res://system/system.tscn"
 Player="*res://singletons/player.gd"
 VolumetricServer="*res://addons/silicon.vfx.volumetrics/volumetric_server.gd"
+MusicPlayer="*res://singletons/music_player.tscn"
+Letterbox="*res://singletons/letterbox/letterbox.tscn"
 
 [editor_plugins]
 
@@ -145,4 +148,3 @@ continue={
 [rendering]
 
 quality/filters/msaa=4
-environment/default_environment="res://default_env.tres"

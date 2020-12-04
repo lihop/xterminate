@@ -1,6 +1,9 @@
 extends Node
 class_name PosixFile
 
+
+signal permissions_changed()
+
 enum {
 	# User permissions
 	S_IRUSR = 256 # 0400
@@ -72,6 +75,7 @@ export(FileTypes) var file_type := FileTypes.REGULAR setget set_file_type, get_f
 func set_user_permissions(flags) -> void:
 	user_permissions = flags
 	set_permissions(flags, S_IRUSR, S_IWUSR, S_IXUSR)
+	emit_signal("permissions_changed")
 
 func get_user_permissions() -> int:
 	return get_permissions(S_IRUSR, S_IWUSR, S_IXUSR)
@@ -79,6 +83,7 @@ func get_user_permissions() -> int:
 func set_group_permissions(flags) -> void:
 	group_permissions = flags
 	set_permissions(flags, S_IRGRP, S_IWGRP, S_IXGRP)
+	emit_signal("permissions_changed")
 
 func get_group_permissions() -> int:
 	return get_permissions(S_IRGRP, S_IWGRP, S_IXGRP)
@@ -86,6 +91,7 @@ func get_group_permissions() -> int:
 func set_others_permissions(flags) -> void:
 	others_permissions = flags
 	set_permissions(flags, S_IROTH, S_IWOTH, S_IXOTH)
+	emit_signal("permissions_changed")
 
 func get_others_permissions() -> int:
 	return get_permissions(S_IROTH, S_IWOTH, S_IXOTH)

@@ -28,3 +28,6 @@
 [submodule "thirdparty/terminal_matrix"]
 	path = thirdparty/terminal_matrix
 	url = https://github.com/jsbueno/terminal_matrix
+[submodule "thirdparty/godot-ascii-shader"]
+	path = thirdparty/godot-ascii-shader
+	url = https://github.com/kb173/godot-ascii-shader

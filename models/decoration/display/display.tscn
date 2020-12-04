@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/godot_xterm/nodes/terminal/terminal.gdns" type="Script" id=1]
+[ext_resource path="res://models/decoration/display/display.gd" type="Script" id=6]
+
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Viewport")
+
+[node name="Display" type="Spatial"]
+script = ExtResource( 6 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 400, 400 )
+transparent_bg = true
+handle_input_locally = false
+keep_3d_linear = true
+
+[node name="Terminal" type="Control" parent="Viewport"]
+margin_right = 400.0
+margin_bottom = 400.0
+script = ExtResource( 1 )
+rows = 21
+cols = 40
+
+[node name="Screen" type="Sprite3D" parent="."]
+flip_v = true
+pixel_size = 0.1
+shaded = true
+texture = SubResource( 6 )
+__meta__ = {
+"apply_volumetrics": false
+}
